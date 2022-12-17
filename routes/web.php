@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $vehicles = VehicleQR::get()->count();
-    return view('dashboard',compact('vehicles'));
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/', function () {
+//    $vehicles = VehicleQR::get()->count();
+//    return view('dashboard',compact('vehicles'));
+//})->middleware(['auth'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     $vehicles = VehicleQR::get()->count();
