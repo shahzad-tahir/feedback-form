@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VehicleQRController;
+use App\Models\VehicleQR;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +18,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    $vehicles = VehicleQR::get()->count();
+    return view('dashboard',compact('vehicles'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $vehicles = VehicleQR::get()->count();
+    return view('dashboard',compact('vehicles'));
 })->middleware(['auth'])->name('dashboard');
+
+//feedback
+Route::get('/vehicle-feedback/{vehicleQR}', [FeedbackController::class, 'index'])->name('vehicle-feedback');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //vehicle QR codes
+    Route::resource('vehicle-qr', VehicleQRController::class)->except(['update','show','edit']);
+    Route::get('/vehicle-qr/print/{vehicleQR}', [VehicleQRController::class, 'print'])->name('vehicle-qr.print');
 });
 
 require __DIR__.'/auth.php';

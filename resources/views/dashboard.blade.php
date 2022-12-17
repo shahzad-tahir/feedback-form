@@ -24,22 +24,22 @@
             </div>
             <!-- end page title -->
             <div class="row">
-                <div class="col-md-4 col-xl-4">
+                <div class="col-md-4 col-xl-6">
                     <div class="widget-rounded-circle card-box">
                         <a href="">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle shadow-lg bg-primary border-primary border">
-                                        <i class="fe-user-check font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-car fa-2x font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-{{--                                        <h2 class="text-dark mt-1"><span--}}
-{{--                                                data-plugin="counterup">{{ $contractors }}</span>--}}
-{{--                                        </h2>--}}
+                                        <h2 class="text-dark mt-1"><span
+                                                data-plugin="counterup">{{ $vehicles }}</span>
+                                        </h2>
                                         <p class="text-muted font-weight-bold font-18 mb-1 text-truncate">Total
-                                            Contractors</p>
+                                            Vehicles</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -47,13 +47,13 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-4 col-xl-4">
+                <div class="col-md-4 col-xl-6">
                     <div class="widget-rounded-circle card-box">
                         <a href="">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle shadow-lg bg-warning border-warning border">
-                                        <i class="fe-truck font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-clipboard fa-2x font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -62,30 +62,7 @@
 {{--                                                data-plugin="counterup">{{ $loadsCount }}</span>--}}
 {{--                                        </h2>--}}
                                         <p class="text-muted font-weight-bold font-18 mb-1 text-truncate">Total
-                                            Loads</p>
-                                    </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </a>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-4 col-xl-4">
-                    <div class="widget-rounded-circle card-box">
-                        <a href="">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle shadow-lg bg-success border-success border">
-                                        <i class="fe-dollar-sign font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-right">
-{{--                                        <h2 class="text-dark mt-1"><span--}}
-{{--                                                data-plugin="counterup">{{ $settlements }}</span>--}}
-{{--                                        </h2>--}}
-                                        <p class="text-muted font-weight-bold font-18 mb-1 text-truncate">Total
-                                            Settlements</p>
+                                            Feedbacks</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
