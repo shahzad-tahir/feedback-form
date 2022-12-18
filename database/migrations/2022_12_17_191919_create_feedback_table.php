@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->string('contact_no')->nullable();
             $table->string('email')->nullable();
+            $table->text('remarks')->nullable();
             $table->foreignId('vehicle_qr_id')
+                ->nullable()
                 ->constrained('vehicle_q_r_s')
                 ->nullOnDelete();
             $table->timestamps();

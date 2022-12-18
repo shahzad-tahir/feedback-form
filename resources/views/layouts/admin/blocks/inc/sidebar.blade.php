@@ -19,6 +19,12 @@
                         <span> Vehicle QR </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('feedback.index') }}">
+                        <i class="fa fa-clipboard"></i>
+                        <span> Feedback </span>
+                    </a>
+                </li>
             </ul>
 
         </div>

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleQRController;
+use App\Models\Feedback;
 use App\Models\VehicleQR;
 use Illuminate\Support\Facades\Route;
 
@@ -17,18 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    $vehicles = VehicleQR::get()->count();
-//    return view('dashboard',compact('vehicles'));
-//})->middleware(['auth'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('index')
+    ->middleware(['auth']);
 
-Route::get('/dashboard', function () {
-    $vehicles = VehicleQR::get()->count();
-    return view('dashboard',compact('vehicles'));
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])->name('dashboard');
 
 //feedback
-Route::get('/vehicle-feedback/{vehicleQR}', [FeedbackController::class, 'index'])->name('vehicle-feedback');
+Route::get('/feedback/{vehicleQR}', [FeedbackController::class, 'show'])->name('feedback.show');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+Route::get('/feedback-success', [FeedbackController::class, 'success'])->name('feedback.success');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
     //vehicle QR codes
     Route::resource('vehicle-qr', VehicleQRController::class)->except(['update','show','edit']);
     Route::get('/vehicle-qr/print/{vehicleQR}', [VehicleQRController::class, 'print'])->name('vehicle-qr.print');
+
+    //feedbacks
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+    Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
 });
 
 require __DIR__.'/auth.php';

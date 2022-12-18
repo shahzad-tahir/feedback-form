@@ -58,9 +58,9 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-right">
-{{--                                        <h2 class="text-dark mt-1"><span--}}
-{{--                                                data-plugin="counterup">{{ $loadsCount }}</span>--}}
-{{--                                        </h2>--}}
+                                        <h2 class="text-dark mt-1"><span
+                                                data-plugin="counterup">{{ $feedbacks }}</span>
+                                        </h2>
                                         <p class="text-muted font-weight-bold font-18 mb-1 text-truncate">Total
                                             Feedbacks</p>
                                     </div>
@@ -73,10 +73,16 @@
             <!-- end row-->
             <div class="row">
                 <div class="col-xl-12 col-md-12">
-                    <div class="card-box">
-                        <h4 class="header-title mb-3">Top 10 Contractors This Month</h4>
-                        <br>
-                        <div id="top-contractors" style="width: 100%; height: 700px"></div>
+                    <div class="card-box" style="overflow-x: scroll;">
+                        <div id="feedback" style="width: 200%; height: 700px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card-box" style="overflow-x: scroll;">
+                        <div id="vehicle-feedbacks" style="width: 100%; height: 700px;"></div>
                     </div>
                 </div>
             </div>
@@ -100,27 +106,40 @@
 @section('jsfooter')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages':['bar']});
+        google.charts.load('current', {'packages': ['bar']});
         google.charts.setOnLoadCallback(drawStuff);
+
         function drawStuff() {
-            var data = new google.visualization.arrayToDataTable([]);
+            var data = new google.visualization.arrayToDataTable(@json($graph));
 
             var options = {
-                width: 800,
-                bars: 'horizontal', // Required for Material Bar Charts.
-                series: {
-                    0: { axis: 'amount' }, // Bind series 0 to an axis named 'loads'.
-                    1: { axis: 'loads' } // Bind series 1 to an axis named 'amount'.
+                chart: {
+                    title: 'Customer Feedback',
+                    subtitle: 'Services ratings by customers',
                 },
-                axes: {
-                    x: {
-                        loads: {label: 'Count'}, // Bottom x-axis.
-                        amount: {side: 'top', label: 'Amount'} // Top x-axis.
-                    }
-                }
+                hAxis: {showTextEvery: 1}
             };
 
-            var chart = new google.charts.Bar(document.getElementById('top-contractors'));
+            var chart = new google.charts.Bar(document.getElementById('feedback'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['bar']});
+        google.charts.setOnLoadCallback(drawStuff);
+
+        function drawStuff() {
+            var data = new google.visualization.arrayToDataTable(@json($graph2));
+
+            var options = {
+                chart: {
+                    title: 'Vehicle Feedbacks',
+                    subtitle: 'Feedbacks given to a vehicle',
+                },
+                hAxis: {showTextEvery: 1}
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('vehicle-feedbacks'));
             chart.draw(data, options);
         }
     </script>
