@@ -26,11 +26,16 @@
                                     <td>{{ $feedback->contact_no ?? 'N/A' }}</td>
                                     <td>{{ $feedback->email ?? 'N/A' }}</td>
                                     <td>
+                                        <a href="{{ route('feedback.detail', $feedback->id) }}"
+                                           class="btn btn-xs btn-primary mb-1">View</a>
                                         <form action="{{ route('feedback.destroy', $feedback->id) }}"
                                               method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                                            <button class="btn btn-xs btn-danger"
+                                                    onclick="return confirm('Are you sure you want to delete this?');">
+                                                Delete
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

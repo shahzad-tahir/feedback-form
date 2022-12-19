@@ -40,7 +40,7 @@ class FeedbackController extends Controller
      */
     public function store(FeedbackRequest $request): RedirectResponse
     {
-        $feedback = Feedback::create($request->all(['vehicle_qr_id', 'name', 'contact_number', 'email']));
+        $feedback = Feedback::create($request->all(['vehicle_qr_id', 'customer_name', 'contact_no', 'email', 'remarks']));
 
         $answers = collect($request->only(array_keys(FeedbackAnswer::QUESTIONS)))->map(function ($ans, $key) {
             return [
@@ -74,5 +74,17 @@ class FeedbackController extends Controller
         Session::flash('alert-class', 'alert-success');
 
         return redirect()->route('feedback.index');
+    }
+
+    /**
+     * @param Feedback $feedback
+     * @return Factory|View|Application
+     */
+    public function detail(Feedback $feedback): Factory|View|Application
+    {
+        $feedback->load('answers');
+        $questions = FeedbackAnswer::QUESTIONS;
+
+        return view('feedback.detail', compact('feedback','questions'));
     }
 }

@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     //feedbacks
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
     Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+    Route::get('/feedback-detail/{feedback}', [FeedbackController::class, 'detail'])->name('feedback.detail');
 });
 
 require __DIR__.'/auth.php';

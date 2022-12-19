@@ -62,6 +62,7 @@ class DashboardController extends Controller
     {
         $vehicles = VehicleQR::select('number')
             ->withCount('feedbacks')
+            ->orderByDesc('number')
             ->get()
             ->map(function($feedback) {
                 return collect($feedback)->values();
