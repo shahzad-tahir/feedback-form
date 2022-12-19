@@ -60,7 +60,7 @@ class DashboardController extends Controller
      */
     protected function vehicleFeedbacks(): array
     {
-        $vehicles = VehicleQR::select('number')
+        $vehicles = VehicleQR::select(DB::raw('(number * 1) as number'))
             ->withCount('feedbacks')
             ->orderByDesc('number')
             ->get()
