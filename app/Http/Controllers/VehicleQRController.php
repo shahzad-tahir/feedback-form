@@ -80,7 +80,7 @@ class VehicleQRController extends Controller
     {
         $vehicleQr = VehicleQR::findOrFail($id);
 
-        if(Storage::disk('public')->exists($vehicleQr->qr_code_image)){
+        if(Storage::disk('public')->exists($vehicleQr->qr_code_image) && $vehicleQr->qr_code_image){
             Storage::disk('public')->delete($vehicleQr->qr_code_image);
         }
 
