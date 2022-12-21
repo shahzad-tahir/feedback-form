@@ -19,7 +19,7 @@ class FeedbackController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        $feedbacks = Feedback::get();
+        $feedbacks = Feedback::orderByDesc('id')->get();
 
         return view('feedback.index', compact('feedbacks'));
     }
@@ -31,7 +31,9 @@ class FeedbackController extends Controller
     public function show(VehicleQR $vehicleQR): Factory|View|Application
     {
         $questions = FeedbackAnswer::QUESTIONS;
-        return view('feedback.feedback-survey', compact('vehicleQR', 'questions'));
+        $options = FeedbackAnswer::OPTIONS;
+
+        return view('feedback.feedback-survey', compact('vehicleQR', 'questions', 'options'));
     }
 
     /**

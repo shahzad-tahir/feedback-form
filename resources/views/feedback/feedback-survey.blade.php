@@ -8,121 +8,107 @@
     <title>Customer Feedback</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <style>
-        @media (min-width:768px) {
-            input[type="radio"] {
-                appearance: none;
-                border: 1px solid #d3d3d3;
-                width: 30px;
-                height: 30px;
-                content: none;
-                outline: none;
-                margin: 0;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px -1px;
-            }
-
-            input[type="radio"]:checked {
-                appearance: none;
-                outline: none;
-                padding: 0;
-                content: none;
-                border: none;
-            }
-
-            input[type="radio"]:checked::before {
-                position: absolute;
-                color: green !important;
-                content: "\00A0\2713\00A0" !important;
-                border: 1px solid #d3d3d3;
-                font-weight: bolder;
-                font-size: 21px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
-<div class="container container-fluid">
-    <div class="card mt-lg-5 mb-5">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="media">
-                        <img src="{{ asset('assets/admin/images/favicon.ico') }}" width="100px" height="100px"
-                             class="img-fluid img-thumbnail align-self-center mr-3" alt="...">
-                    </div>
-                </div>
-                <div class="col-md-6 text-center mt-4">
-                    <h2>Customer Feedback</h2>
-                </div>
+<div class="container container-fluid w-lg-50 w-md-50 w-xl-40 mt-lg-5 mb-lg-5 w-sm-100 border"
+     style="max-width: 800px; background-color: #f7f8f9 !important;">
+    <div class=" mt-lg-5 mb-5">
+        <div class="row text-center mt-4">
+            <div class="media">
+                <img src="{{ asset('logo.svg') }}" width="250px" height="250px"
+                     class="img-fluid img-thumbnail align-self-center" alt="logo">
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <section>
-                        <form action="{{ route('feedback.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="vehicle_qr_id" value="{{ $vehicleQR->id }}">
-                            <div class="table-responsive">
-                                <table class="table table-bordered text-center">
-                                    <tr>
-                                        <td colspan="2" style="text-align: left !important;">Name of Passenger (Optional)
-                                        </td>
-                                        <td colspan="5"><input type="text" name="customer_name" class="form-control"
-                                                               placeholder="Enter your name here"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: left !important;">Contact Number (Optional)</td>
-                                        <td colspan="5"><input type="text" name="contact_no" class="form-control"
-                                                               placeholder="Enter your contact number here"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: left !important;">Email Address (Optional)</td>
-                                        <td colspan="5"><input type="text" name="email" class="form-control"
-                                                               placeholder="Enter your email address here"></td>
-                                    </tr>
-                                    <tr class="bg-info">
-                                        <td>SI#</td>
-                                        <td style="text-align: left !important;">Description</td>
-                                        <td>Excellent</td>
-                                        <td>Good</td>
-                                        <td>Satisfactory</td>
-                                        <td>Unsatisfactory</td>
-                                        <td>Not Acceptable</td>
-                                    </tr>
-                                    @foreach($questions as $key => $question)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td style="text-align: left !important;">{{ $question }}</td>
-                                            <td><input type="radio" name="{{ $key }}" value="5"></td>
-                                            <td><input type="radio" name="{{ $key }}" value="4"></td>
-                                            <td><input type="radio" name="{{ $key }}" value="3"></td>
-                                            <td><input type="radio" name="{{ $key }}" value="2"></td>
-                                            <td><input type="radio" name="{{ $key }}" value="1"></td>
-                                        </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                            <hr class="mt-2">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="remarks" style="text-align: left !important;"
-                                               class="mb-2">Remarks</label>
-                                        <textarea name="remarks" cols="7" rows="3" class="form-control"></textarea>
-                                    </div>
+        <div class="row mt-5">
+            <div class="text-center">
+                <h5>Customer Feedback for <br> <b>Bus No. {{ $vehicleQR->number }}</b></h5>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <form action="{{ route('feedback.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="vehicle_qr_id" value="{{ $vehicleQR->id }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="customer_name" class="mb-1">Name of Passenger (Optional)</label>
+                                    <input type="text" name="customer_name" class="form-control"
+                                           placeholder="Enter your full name">
+                                    @error('customer_name')
+                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success" style="float: right !important;">
-                                        Submit
-                                    </button>
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="contact_no" class="mb-1">Contact Number (Optional)</label>
+                                    <input type="text" name="contact_no" class="form-control"
+                                           placeholder="Enter your contact number">
+                                    @error('contact_no')
+                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
-                        </form>
-                    </section>
-                </div>
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="email" class="mb-1">Email Address (Optional)</label>
+                                    <input type="text" name="email" class="form-control"
+                                           placeholder="Enter your email address">
+                                    @error('email')
+                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="trip_date" class="mb-1">Trip Date (Mandatory)</label>
+                                    <input type="date" name="trip_date" class="form-control" required>
+                                    @error('trip_date')
+                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="trip_time" class="mb-1">Trip Time (Mandatory)</label>
+                                    <input type="time" name="trip_time" class="form-control" required>
+                                    @error('trip_time')
+                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        @foreach($questions as $key => $question)
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="{{ $key }}"
+                                           class="mb-1">{{ 'Q'.$loop->iteration.'. '.$question }}</label>
+                                    <select name="{{ $key }}" id="{{ $key }}" class="form-control" >
+                                        <option selected disabled>Select</option>
+                                        @foreach($options as $opKey => $option)
+                                            <option value="{{ $opKey }}">{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endforeach
+                            <div class="row mt-1 mb-3">
+                                <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+                                    <label for="remarks"
+                                           class="mb-1">Remarks</label>
+                                    <textarea name="remarks" class="form-control mb-1" id="remarks" cols="30" rows="4" placeholder="Remarks"></textarea>
+                                </div>
+                            </div>
+                        <button class="btn btn-dark btn-lg" type="submit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

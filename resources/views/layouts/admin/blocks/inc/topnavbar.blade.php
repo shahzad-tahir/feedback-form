@@ -41,7 +41,7 @@
     <div class="logo-box">
         <a href="{{ url('/') }}" class="logo text-center">
             <span class="logo-lg">
-                <img src="{{ asset('logo.png') }}" alt="" height="70">
+                <img src="{{ asset('logo.svg') }}" alt="" height="70">
                 <!--  -->
             </span>
             <span class="logo-sm">
