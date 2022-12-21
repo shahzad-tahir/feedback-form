@@ -9,7 +9,8 @@
     <style>
         .print {
             text-align: center;
-            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
             width: 400px !important;
             height: 450px;
             background-color: black;

@@ -42,7 +42,9 @@ class FeedbackController extends Controller
      */
     public function store(FeedbackRequest $request): RedirectResponse
     {
-        $feedback = Feedback::create($request->all(['vehicle_qr_id', 'customer_name', 'contact_no', 'email', 'remarks']));
+        $feedback = Feedback::create($request->all(
+            ['vehicle_qr_id', 'customer_name', 'contact_no', 'email', 'remarks', 'trip_date', 'trip_time']
+        ));
 
         $answers = collect($request->only(array_keys(FeedbackAnswer::QUESTIONS)))->map(function ($ans, $key) {
             return [

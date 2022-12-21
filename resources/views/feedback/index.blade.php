@@ -15,7 +15,9 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Number</th>
-                                <th>QR Code</th>
+                                <th>Email</th>
+                                <th>Trip Date</th>
+                                <th>Trip Time</th>
                                 <th>Action(s)</th>
                             </tr>
                             </thead>
@@ -25,6 +27,8 @@
                                     <td>{{ $feedback->customer_name ?? 'N/A' }}</td>
                                     <td>{{ $feedback->contact_no ?? 'N/A' }}</td>
                                     <td>{{ $feedback->email ?? 'N/A' }}</td>
+                                    <td>{{ $feedback->trip_date ?? 'N/A' }}</td>
+                                    <td>{{ $feedback->trip_time ?? 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('feedback.detail', $feedback->id) }}"
                                            class="btn btn-xs btn-primary mb-1">View</a>

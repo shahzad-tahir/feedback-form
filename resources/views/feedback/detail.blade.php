@@ -58,16 +58,28 @@
                                              value="{{ $feedback->customer_name ?? 'N/A' }}" placeholder="Enter your name here" readonly></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="text-align: left !important;">Contact Number (Optional)
+                                        <td colspan="2" style="text-align: left !important;">Contact Number
                                         </td>
                                         <td colspan="5"><input type="text" name="contact_no" class="form-control"
                                              value="{{ $feedback->contact_no ?? 'N/A' }}" placeholder="Enter your contact number here" readonly></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="text-align: left !important;">Email Address (Optional)
+                                        <td colspan="2" style="text-align: left !important;">Email Address
                                         </td>
                                         <td colspan="5"><input type="text" name="email" class="form-control"
                                              value="{{ $feedback->email ?? 'N/A' }}" placeholder="Enter your email address here" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left !important;">Trip Date
+                                        </td>
+                                        <td colspan="5"><input type="date" class="form-control"
+                                                               value="{{ $feedback->trip_date ?? 'N/A' }}" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left !important;">Trip Time
+                                        </td>
+                                        <td colspan="5"><input type="time" class="form-control"
+                                                               value="{{ $feedback->trip_time ?? 'N/A' }}" readonly></td>
                                     </tr>
                                     <tr class="bg-info">
                                         <td>SI#</td>

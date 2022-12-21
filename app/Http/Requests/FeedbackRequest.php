@@ -14,10 +14,13 @@ class FeedbackRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'max:300|string|nullable',
-            'contact_number' => 'max:50|string|nullable',
+            'customer_name' => 'max:300|string|nullable',
+            'contact_no' => 'max:50|string|nullable',
             'email' => 'max:200|string|email|nullable',
-            'vehicle_qr_id' => 'required|exists:vehicle_q_r_s,id'
+            'vehicle_qr_id' => 'required|exists:vehicle_q_r_s,id',
+            'remarks' => 'max:1000',
+            'trip_date' => 'required',
+            'trip_time' => 'required'
         ];
     }
 }
