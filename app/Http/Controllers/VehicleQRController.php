@@ -49,16 +49,16 @@ class VehicleQRController extends Controller
     {
         $vehicleQr = VehicleQR::create($request->all(['name', 'number']));
 
-        $path = '/images/qr-code/';
-
-        $file_path = $path . time() . '.svg';
-
-        $image = QrCode::format('svg')
-            ->generate(url(route('feedback.show',$vehicleQr->id)));
-
-        Storage::disk('public')->put($file_path, $image);
-
-        $vehicleQr->qr_code_image = $file_path;
+//        $path = '/images/qr-code/';
+//
+//        $file_path = $path . time() . '.svg';
+//
+//        $image = QrCode::format('svg')
+//            ->generate(url(route('feedback.show',$vehicleQr->id)));
+//
+//        Storage::disk('public')->put($file_path, $image);
+//
+//        $vehicleQr->qr_code_image = $file_path;
         $vehicleQr->save();
 
         Session::flash('message', 'Vehicle QR Code added successfully');
