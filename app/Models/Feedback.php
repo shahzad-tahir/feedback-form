@@ -38,10 +38,32 @@ class Feedback extends Model
         return $this->hasMany(FeedbackAnswer::class, 'feedback_id');
     }
 
+    /**
+     * @return Attribute
+     */
     protected function tripDate(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => date('Y-m-d',strtotime($value))
+            set: fn($value) => date('Y-m-d', strtotime($value))
         );
     }
+
+    /**
+     * @param $query
+     * @param $vehicleId
+     * @param $dateRange
+     * @return mixed
+     */
+    public function scopeWhereVehicleDaterange($query, $vehicleId, $dateRange): mixed
+    {
+        return $query->when(isset($dateRange[1]), function ($q) use ($dateRange) {
+            return $q->whereBetween('trip_date', [$dateRange[0], $dateRange[1]]);
+        }, function ($q) use ($dateRange) {
+            return isset($dateRange[0]) ? $q->where('trip_date', $dateRange[0]) : $q;
+        })->when(!empty($vehicleId), function ($q) use ($vehicleId) {
+            return $q->where('vehicle_qr_id', $vehicleId);
+        });
+    }
+
+
 }

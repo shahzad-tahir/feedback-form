@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
     var a = $("#datatable-buttons").DataTable({
         lengthChange: !1,
-        buttons: ["copy", "print", "pdf"],
+        buttons: ["copy", "print", "pdf", "excel"],
         language: {paginate: {previous: "<i class='mdi mdi-chevron-left'>", next: "<i class='mdi mdi-chevron-right'>"}},
         drawCallback: function () {
             $(".dataTables_paginate > .pagination").addClass("pagination-rounded")

@@ -25,6 +25,12 @@
                         <span> Feedback </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('reports.index') }}">
+                        <i class="fa fa-chart-bar"></i>
+                        <span> Reports </span>
+                    </a>
+                </li>
             </ul>
 
         </div>

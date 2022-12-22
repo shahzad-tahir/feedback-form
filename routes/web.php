@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VehicleQRController;
 use App\Models\Feedback;
 use App\Models\VehicleQR;
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
     Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
     Route::get('/feedback-detail/{feedback}', [FeedbackController::class, 'detail'])->name('feedback.detail');
+
+    //reports
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
 });
 
 require __DIR__.'/auth.php';

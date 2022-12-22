@@ -10,8 +10,8 @@
                     <div class="card-body">
                         <h4 class="header-title">Customer Feedbacks</h4>
                         <br>
-                        <table id="scroll-horizontal-datatable" class="table w-100 nowrap">
-                            <thead>
+                        <table id="scroll-vertical-datatable" class="table w-100 nowrap">
+                        <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Number</th>
