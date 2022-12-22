@@ -64,7 +64,7 @@ class DashboardController extends Controller
             $index = 1;
 
             $item->each(function($qs) use(&$sortedItem, &$index){
-                $sortedItem->put($index, $qs);
+                $sortedItem->put($index, (int)$qs);
                 $index++;
             });
 
