@@ -90,4 +90,10 @@ class VehicleQRController extends Controller
     {
         return view('vehicle-qr.print', compact('vehicleQR'));
     }
+
+    public function printAll()
+    {
+        $qrCodes = VehicleQR::all();
+        return view('vehicle-qr.print-all', compact('qrCodes'));
+    }
 }

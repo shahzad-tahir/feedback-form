@@ -8,6 +8,7 @@
             <div class="card-body">
                 <h5><span class="fa fa-tools mr-2"></span>QUICK ACTIONS</h5>
                 <a href="{{ route('vehicle-qr.create') }}" class="btn btn-success btn-sm ">Create Vehicle QR Code</a>
+                <a href="{{ route('vehicle-qr.print-all') }}" target="_blank" class="btn btn-success btn-sm ">Print All QR codes</a>
             </div>
         </div>
         <div class="row">

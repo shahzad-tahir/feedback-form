@@ -29,7 +29,7 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-12 col-sm-12 col-lg-12">
-                <form action="{{ route('feedback.store') }}" method="POST">
+                <form action="{{ route('feedback.store') }}" method="POST" novalidate>
                     @csrf
                     <input type="hidden" name="vehicle_qr_id" value="{{ $vehicleQR->id }}">
                     <div class="card">
@@ -37,48 +37,48 @@
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="customer_name" class="mb-1">Name of Passenger (Optional)</label>
-                                    <input type="text" name="customer_name" class="form-control"
+                                    <input type="text" name="customer_name" value="{{ old('customer_name') }}" class="form-control"
                                            placeholder="Enter your full name">
                                     @error('customer_name')
-                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="contact_no" class="mb-1">Contact Number (Optional)</label>
-                                    <input type="text" name="contact_no" class="form-control"
+                                    <input type="text" name="contact_no" value="{{ old('contact_no') }}" class="form-control"
                                            placeholder="Enter your contact number">
                                     @error('contact_no')
-                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="email" class="mb-1">Email Address (Optional)</label>
-                                    <input type="text" name="email" class="form-control"
+                                    <input type="text" name="email" value="{{ old('email') }}" class="form-control"
                                            placeholder="Enter your email address">
                                     @error('email')
-                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="trip_date" class="mb-1">Trip Date (Mandatory)</label>
-                                    <input type="date" name="trip_date" class="form-control" required>
+                                    <input type="date" name="trip_date" value="{{ old('trip_date') }}" min="{{ date('Y-m-d', strtotime(date('Y-m-d'). ' - 2 days')) }}" max="{{ date('Y-m-d') }}" class="form-control" required/>
                                     @error('trip_date')
-                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="trip_time" class="mb-1">Trip Time (Mandatory)</label>
-                                    <input type="time" name="trip_time" class="form-control" required>
+                                    <input type="time" name="trip_time" value="{{ old('trip_time') }}" class="form-control" required>
                                     @error('trip_time')
-                                    <small class="form-text text-muted text-danger">{{ $message }}</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -90,20 +90,23 @@
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="{{ $key }}"
                                            class="mb-1">{{ 'Q'.$loop->iteration.'. '.$question }}</label>
-                                    <select name="{{ $key }}" id="{{ $key }}" class="form-control" >
+                                    <select name="{{ $key }}" id="{{ $key }}" class="form-control" {{ in_array($key,$rules) ? 'required' : '' }}>
                                         <option selected disabled>Select</option>
                                         @foreach($options as $opKey => $option)
-                                            <option value="{{ $opKey }}">{{ $option }}</option>
+                                            <option value="{{ $opKey }}" {{ $opKey == old($key) ? 'selected' : '' }}>{{ $option }}</option>
                                         @endforeach
                                     </select>
+                                    @error($key)
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         @endforeach
                             <div class="row mt-1 mb-3">
                                 <div class="col-md-12 col-sm-12 col-lg-12 form-group">
                                     <label for="remarks"
-                                           class="mb-1">Remarks</label>
-                                    <textarea name="remarks" class="form-control mb-1" id="remarks" cols="30" rows="4" placeholder="Remarks"></textarea>
+                                           class="mb-1">Overall/Any other comments</label>
+                                    <textarea name="remarks" class="form-control mb-1" id="remarks" cols="30" rows="4" placeholder="Remarks">{{ old('remarks') }}</textarea>
                                 </div>
                             </div>
                         <button class="btn btn-dark btn-lg" type="submit">Submit</button>

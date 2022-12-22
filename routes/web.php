@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     //vehicle QR codes
     Route::resource('vehicle-qr', VehicleQRController::class)->except(['update','show','edit']);
     Route::get('/vehicle-qr/print/{vehicleQR}', [VehicleQRController::class, 'print'])->name('vehicle-qr.print');
+    Route::get('/vehicle-qr/print-all', [VehicleQRController::class, 'printAll'])->name('vehicle-qr.print-all');
 
     //feedbacks
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');

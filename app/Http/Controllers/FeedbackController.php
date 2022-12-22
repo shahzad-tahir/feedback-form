@@ -32,8 +32,9 @@ class FeedbackController extends Controller
     {
         $questions = FeedbackAnswer::QUESTIONS;
         $options = FeedbackAnswer::OPTIONS;
+        $rules = array_keys(FeedbackAnswer::VALIDATION_RULES);
 
-        return view('feedback.feedback-survey', compact('vehicleQR', 'questions', 'options'));
+        return view('feedback.feedback-survey', compact('vehicleQR', 'questions', 'options', 'rules'));
     }
 
     /**
