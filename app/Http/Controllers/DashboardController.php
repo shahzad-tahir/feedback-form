@@ -28,30 +28,50 @@ class DashboardController extends Controller
         $graph = [];
 
         foreach (FeedbackAnswer::QUESTIONS as $key => $item) {
-            $answersCount = FeedbackAnswer::select(DB::raw('count(answer) as total'))
+            $answersCount = FeedbackAnswer::select(DB::raw('count(answer) as total, answer'))
                 ->where('question', $key)
                 ->groupBy('answer')
                 ->orderByDesc('answer')
                 ->get()
-                ->pluck('total')
-                ->prepend($item);
+                ->mapWithKeys(function($item) {
+                    return [$item['answer'] => $item['total']];
+                })
+                ->put(0,$item);
 
             $graph[] = $answersCount;
         }
 
         $graph = collect($graph)->map(function($item) {
+            $question = $item[0];
+
             if (count($item) < 6) {
-                $remaining = 6 - count($item);
-                for ($i = 0; $i < $remaining; $i++) {
-                    $item->push(0);
+                $existingAns = [];
+
+                $item->each(function($a, $key) use (&$existingAns){
+                    if ($key != 0) $existingAns[] = $key;
+                });
+
+                foreach (array_keys(FeedbackAnswer::OPTIONS) as $opt) {
+                    if (!in_array($opt, $existingAns)) {
+                        $item->put($opt,0);
+                    }
                 }
             }
 
-            return $item;
+            $item = $item->sortKeysDesc()->forget(0);
+
+            $sortedItem = collect();
+            $index = 1;
+
+            $item->each(function($qs) use(&$sortedItem, &$index){
+                $sortedItem->put($index, $qs);
+                $index++;
+            });
+
+            return $sortedItem->put(0, $question)->sortKeys();
         })->toArray();
 
         $services = [['Services', 'Excellent', 'Good', 'Satisfactory', 'Unsatisfactory', 'Not Acceptable']];
-
         return array_merge($services,$graph);
     }
 
