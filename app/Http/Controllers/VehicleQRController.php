@@ -53,11 +53,8 @@ class VehicleQRController extends Controller
 
         $file_path = $path . time() . '.svg';
 
-//        $image = QrCode::format('svg')
-//            ->generate(url(route('feedback.show',$vehicleQr->id)));
-
         $image = QrCode::format('svg')
-            ->generate('Feedback Form');
+            ->generate(url(route('feedback.show',$vehicleQr->id)));
 
         Storage::disk('public')->put($file_path, $image);
 
