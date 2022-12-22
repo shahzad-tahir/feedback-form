@@ -2,5 +2,52 @@
 
 ## About Feedback Form
 
-A dynamic feedback form with QR Code generation related to a specific vehicle. The project contains a Dashboard of all the feedbacks along with filters.
+A customer feedback form with QR Code generation related to a specific vehicle. The project contains a Dashboard of all the feedbacks along with reports.
+
+## Installation
+
+Install all Laravel dependencies via composer
+```
+composer install
+```
+
+Install all JS dependencies via composer
+```
+npm install && npm run dev
+```
+
+Then create a environment file using this command-
+```
+cp .env.example .env
+```
+
+Then edit `.env` file with appropriate credential for your database server. Just edit these two parameter(`DB_USERNAME`, `DB_PASSWORD`, `DB_DATABASE`).
+
+Then create a database named `feedback_db` in phpmyadmin or Mysqlworkbench whichever is configured and then do a database migration using this command-
+```
+php artisan migrate --seed
+```
+
+Generate application key, which will be used for password hashing, session and cookie encryption etc.
+```
+php artisan key:generate
+```
+
+Cache the updated config by running this command
+```
+php artisan config:cache
+```
+
+## Run server
+
+Run server using this command-
+```
+php artisan serve
+```
+
+Then go to `http://localhost:8000` from your browser and see the app.
+
+Login Credentials are `admin@feedback.com` `12345678`
+
+
 
