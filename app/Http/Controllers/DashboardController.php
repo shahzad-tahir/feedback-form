@@ -44,7 +44,7 @@ class DashboardController extends Controller
         $graph = collect($graph)->map(function($item) {
             $question = $item[0];
 
-            if (count($item) < 6) {
+            if (count($item) < 8 ) {
                 $existingAns = [];
 
                 $item->each(function($a, $key) use (&$existingAns){
@@ -71,7 +71,7 @@ class DashboardController extends Controller
             return $sortedItem->put(0, $question)->sortKeys();
         })->toArray();
 
-        $services = [['Services', 'Excellent', 'Good', 'Satisfactory', 'Unsatisfactory', 'Not Acceptable']];
+        $services = [['Services', 'Excellent', 'Good', 'Satisfactory', 'Unsatisfactory', 'Not Acceptable', 'Yes', 'No']];
         return array_merge($services,$graph);
     }
 

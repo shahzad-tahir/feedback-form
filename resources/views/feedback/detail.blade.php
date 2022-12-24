@@ -54,31 +54,31 @@
                                         <td colspan="2" style="text-align: left !important;">Name of Passenger
                                             (Optional)
                                         </td>
-                                        <td colspan="5"><input type="text" name="customer_name" class="form-control"
+                                        <td colspan="7"><input type="text" name="customer_name" class="form-control"
                                              value="{{ $feedback->customer_name ?? 'N/A' }}" placeholder="Enter your name here" readonly></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: left !important;">Contact Number
                                         </td>
-                                        <td colspan="5"><input type="text" name="contact_no" class="form-control"
+                                        <td colspan="7"><input type="text" name="contact_no" class="form-control"
                                              value="{{ $feedback->contact_no ?? 'N/A' }}" placeholder="Enter your contact number here" readonly></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: left !important;">Email Address
                                         </td>
-                                        <td colspan="5"><input type="text" name="email" class="form-control"
+                                        <td colspan="7"><input type="text" name="email" class="form-control"
                                              value="{{ $feedback->email ?? 'N/A' }}" placeholder="Enter your email address here" readonly></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: left !important;">Trip Date
                                         </td>
-                                        <td colspan="5"><input type="date" class="form-control"
+                                        <td colspan="7"><input type="date" class="form-control"
                                                                value="{{ $feedback->trip_date ?? 'N/A' }}" readonly></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: left !important;">Trip Time
                                         </td>
-                                        <td colspan="5"><input type="time" class="form-control"
+                                        <td colspan="7"><input type="time" class="form-control"
                                                                value="{{ $feedback->trip_time ?? 'N/A' }}" readonly></td>
                                     </tr>
                                     <tr class="bg-info">
@@ -89,6 +89,8 @@
                                         <td>Satisfactory</td>
                                         <td>Unsatisfactory</td>
                                         <td>Not Acceptable</td>
+                                        <td>Yes</td>
+                                        <td>No</td>
                                     </tr>
                                     @php $answers = $feedback?->answers; @endphp
                                     @foreach($questions as $key => $question)
@@ -98,18 +100,26 @@
                                             <td style="text-align: left !important;">{{ $question }}</td>
                                             <td>
                                                 <input type="radio" name="{{ $key }}" value="5"
-                                                       {{ $answer?->answer == 5 ? 'checked' : '' }} disabled>
+                                                       {{ $answer?->answer == 7 ? 'checked' : '' }} disabled>
                                             </td>
                                             <td>
                                                 <input type="radio" name="{{ $key }}" value="4"
-                                                       {{ $answer?->answer == 4 ? 'checked' : '' }} disabled>
+                                                       {{ $answer?->answer == 6 ? 'checked' : '' }} disabled>
                                             </td>
                                             <td>
                                                 <input type="radio" name="{{ $key }}" value="3"
-                                                       {{ $answer?->answer == 3 ? 'checked' : '' }} disabled>
+                                                       {{ $answer?->answer == 5 ? 'checked' : '' }} disabled>
                                             </td>
                                             <td>
                                                 <input type="radio" name="{{ $key }}" value="2"
+                                                       {{ $answer?->answer == 4 ? 'checked' : '' }} disabled>
+                                            </td>
+                                            <td>
+                                                <input type="radio" name="{{ $key }}" value="1"
+                                                       {{ $answer?->answer == 3 ? 'checked' : '' }} disabled>
+                                            </td>
+                                            <td>
+                                                <input type="radio" name="{{ $key }}" value="1"
                                                        {{ $answer?->answer == 2 ? 'checked' : '' }} disabled>
                                             </td>
                                             <td>

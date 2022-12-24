@@ -22,11 +22,25 @@ class FeedbackAnswer extends Model
     ];
 
     public const OPTIONS = [
-        5 => 'Excellent',
-        4 => 'Good',
-        3 => 'Satisfactory',
-        2 => 'Unsatisfactory',
-        1 => 'Not Acceptable'
+        7 => 'Excellent',
+        6 => 'Good',
+        5 => 'Satisfactory',
+        4 => 'Unsatisfactory',
+        3 => 'Not Acceptable',
+        2 => 'Yes',
+        1 => 'No'
+    ];
+
+    public const OPTION_TYPE_5 = '5options';
+    public const OPTION_TYPE_2 = '2options';
+
+    public const OPTION_TYPES = [
+        'q1' => self::OPTION_TYPE_5,
+        'q2' => self::OPTION_TYPE_5,
+        'q3' => self::OPTION_TYPE_5,
+        'q4' => self::OPTION_TYPE_5,
+        'q5' => self::OPTION_TYPE_2,
+        'q6' => self::OPTION_TYPE_2,
     ];
 
     public const VALIDATION_RULES = [

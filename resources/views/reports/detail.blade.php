@@ -27,7 +27,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Customer Feedback Report for {{ $dynamicTitle }}</h4>
+                        <h4 class="header-title">Customer Feedback Count Report for {{ $dynamicTitle }}</h4>
                         <table id="data-table-butns" class="table w-100 nowrap">
                             <thead>
                             <tr>
@@ -37,6 +37,8 @@
                                 <th>Satisfactory</th>
                                 <th>Unsatisfactory</th>
                                 <th>Not Acceptable</th>
+                                <th>Yes</th>
+                                <th>No</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,6 +59,12 @@
                                     </td>
                                     <td>
                                         {{ $report[$loop->iteration - 1][5] }}
+                                    </td>
+                                    <td>
+                                        {{ $report[$loop->iteration - 1][6] }}
+                                    </td>
+                                    <td>
+                                        {{ $report[$loop->iteration - 1][7] }}
                                     </td>
                                 </tr>
                             @endforeach

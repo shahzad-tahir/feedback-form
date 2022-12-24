@@ -92,9 +92,19 @@
                                            class="mb-1">{{ 'Q'.$loop->iteration.'. '.$question }}</label>
                                     <select name="{{ $key }}" id="{{ $key }}" class="form-control" {{ in_array($key,$rules) ? 'required' : '' }}>
                                         <option selected disabled>Select</option>
-                                        @foreach($options as $opKey => $option)
-                                            <option value="{{ $opKey }}" {{ $opKey == old($key) ? 'selected' : '' }}>{{ $option }}</option>
-                                        @endforeach
+                                        @if($optionTypes[$key] == \App\Models\FeedbackAnswer::OPTION_TYPE_5)
+                                            @foreach($options as $opKey => $option)
+                                                @if($opKey > 2)
+                                                    <option value="{{ $opKey }}" {{ $opKey == old($key) ? 'selected' : '' }}>{{ $option }}</option>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            @foreach($options as $opKey => $option)
+                                                @if($opKey < 3)
+                                                    <option value="{{ $opKey }}" {{ $opKey == old($key) ? 'selected' : '' }}>{{ $option }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </select>
                                     @error($key)
                                     <small class="form-text text-danger">{{ $message }}</small>
