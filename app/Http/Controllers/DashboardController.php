@@ -5,31 +5,48 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use App\Models\FeedbackAnswer;
 use App\Models\VehicleQR;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    /**
+     * @param Request $request
+     * @return Factory|View|Application
+     */
+    public function index(Request $request): Factory|View|Application
     {
-        $vehicles = VehicleQR::get()->count();
-        $feedbacks = Feedback::get()->count();
+        $dateRange = $request->date_range ? explode(' to ', $request->date_range) : null;
+        $vehicleId = $request->vehicle_id;
 
-        $graph = $this->feedbackGraph();
+        $graph = $this->feedbackGraph($vehicleId, $dateRange);
         $graph2 = $this->vehicleFeedbacks();
 
-        return view('dashboard',compact('vehicles','feedbacks', 'graph', 'graph2'));
+        $vehicles = VehicleQR::get();
+        $vehicleCount = VehicleQR::get()->count();
+        $feedbacks = Feedback::get()->count();
+
+        return view('dashboard',compact('vehicles','feedbacks', 'graph', 'graph2', 'vehicleCount'));
     }
 
     /**
+     * @param $vehicleId
+     * @param $dateRange
      * @return array
      */
-    protected function feedbackGraph(): array
+    protected function feedbackGraph($vehicleId, $dateRange): array
     {
         $graph = [];
 
         foreach (FeedbackAnswer::QUESTIONS as $key => $item) {
             $answersCount = FeedbackAnswer::select(DB::raw('count(answer) as total, answer'))
                 ->where('question', $key)
+                ->whereHas('feedback', function ($q) use ($vehicleId, $dateRange) {
+                    return $q->whereVehicleDaterange($vehicleId, $dateRange);
+                })
                 ->groupBy('answer')
                 ->orderByDesc('answer')
                 ->get()

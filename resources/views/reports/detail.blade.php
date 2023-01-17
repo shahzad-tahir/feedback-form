@@ -2,7 +2,8 @@
 @php
     $forVehicle = !empty($vehicle) ? $vehicle->name.' ('.$vehicle->number.')': null;
     $forDateRange = !empty($date) ? $date : null;
-    $dynamicTitle = $forVehicle ?? $forDateRange;
+    $title = $forVehicle ?? $forDateRange;
+    $dynamicTitle = $title ?? 'All Vehicles';
     $title = 'Feedback Report | '.$dynamicTitle;
 @endphp
 @section('title', $title)

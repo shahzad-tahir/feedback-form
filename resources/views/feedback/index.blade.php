@@ -10,6 +10,45 @@
                     <div class="card-body">
                         <h4 class="header-title">Customer Feedbacks</h4>
                         <br>
+                        <form action="{{ route('feedback.index') }}" method="GET">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="vehicle_id">Vehicle</label>
+                                        <select name="vehicle_id" id="vehicle_id"
+                                                class="form-control custom-select">
+                                            <option disabled selected>Select Vehicle</option>
+                                            @foreach($vehicles as $vehicle)
+                                                <option
+                                                    value="{{ $vehicle->id }}" {{ request()->vehicle_id == $vehicle->id ? 'selected' : '' }}>{{ $vehicle->name.' ('.$vehicle->number.')' }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('vehicle_id')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date_range">Date Range</label>
+                                        <input type="text" class="form-control range-datepicker" id="date_range"
+                                               name="date_range"
+                                               value="{{ request()->date_range }}" placeholder="Date Range">
+                                        @error('date_range')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3 mt-1">
+                                    <button class="btn btn-sm btn-primary mt-3" type="submit">Set Filter
+                                    </button>
+                                    <a href="{{ route('dashboard') }}" class="btn btn-sm btn-danger mt-3" type="submit">Reset
+                                        Filter
+                                    </a>
+                                </div>
+
+                            </div>
+                        </form>
                         <table id="scroll-vertical-datatable" class="table w-100 nowrap">
                         <thead>
                             <tr>

@@ -75,8 +75,10 @@ class FeedbackAnswer extends Model
         foreach (self::QUESTIONS as $key => $item) {
             $answersCount = self::select(DB::raw('count(answer) as total, answer'))
                 ->where('question', $key)
-                ->whereHas('feedback', function ($q) use ($vehicleId, $date) {
-                    return $q->whereVehicleDaterange($vehicleId, $date);
+                ->when(!empty($vehicleId) || !empty($date), function ($query) use ($vehicleId, $date) {
+                    return $query->whereHas('feedback', function ($q) use ($vehicleId, $date) {
+                        return $q->whereVehicleDaterange($vehicleId, $date);
+                    });
                 })
                 ->groupBy('answer')
                 ->orderByDesc('answer')

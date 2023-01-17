@@ -10,18 +10,27 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class FeedbackController extends Controller
 {
     /**
+     * @param Request $request
      * @return Factory|View|Application
      */
-    public function index(): Factory|View|Application
+    public function index(Request $request): Factory|View|Application
     {
-        $feedbacks = Feedback::orderByDesc('id')->get();
+        $dateRange = $request->date_range ? explode(' to ', $request->date_range) : null;
+        $vehicleId = $request->vehicle_id;
 
-        return view('feedback.index', compact('feedbacks'));
+        $feedbacks = Feedback::whereVehicleDaterange($vehicleId, $dateRange)
+            ->orderByDesc('id')
+            ->get();
+
+        $vehicles = VehicleQR::get();
+
+        return view('feedback.index', compact('feedbacks', 'vehicles'));
     }
 
     /**

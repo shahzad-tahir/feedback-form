@@ -19,8 +19,7 @@ class ReportController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'vehicle_id' => 'required_without_all:date_range|exists:vehicle_q_r_s,id',
-            'date_range' => 'required_without_all:vehicle_id',
+            'vehicle_id' => 'exists:vehicle_q_r_s,id'
         ]);
 
         $dateRange = $request->date_range ? explode(' to ', $request->date_range) : null;

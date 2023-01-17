@@ -13,8 +13,6 @@
             color-adjust: exact;
             width: 400px !important;
             height: 450px;
-            background-color: black;
-            color: white;
         }
 
         .center {
@@ -26,9 +24,11 @@
 </head>
 <body>
 <div id="print" class="print center">
+    <img src="{{ asset('logo.svg') }}" alt="" height="50">
     <h2>Scan the QR code for Customer Feedback</h2>
     <img src="/storage{{$vehicleQR->qr_code_image}}" height="300px" width="300px" alt="">
     <h2>Bus No. {{ $vehicleQR->number }}</h2>
+    <small>Powered by {{ env('APP_URL') }}</small>
 </div>
 </body>
 <script>

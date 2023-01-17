@@ -20,20 +20,22 @@
 </head>
 <body>
 <div id="print" class="container" style="color-adjust: exact; -webkit-print-color-adjust: exact;">
-    <div class="row">
-        @foreach($qrCodes->chunk(6) as $chunk)
+    <div class="row mt-lg-5">
+        @foreach($qrCodes->chunk(4) as $chunk)
             @foreach($chunk as $qrcode)
                 <div class="col-md-5">
-                    <div class="border bg-black p-lg-2 mb-lg-3">
-                        <div class="align-content-center text-white text-center" style="max-height: 300px">
+                    <div class="border p-lg-2 mb-lg-3">
+                        <div class="align-content-center text-center mt-8" style="max-height: 400px">
+                            <img src="{{ asset('logo.svg') }}" alt="" height="50">
                             <h5 class="p-2">Scan the QR code for Customer Feedback</h5>
                             <img src="/storage{{$qrcode->qr_code_image}}" height="150px" width="150px" alt="">
                             <h5 class="p-3">Bus No. {{ $qrcode->number }}</h5>
+                            <small>Powered by {{ env('APP_URL') }}</small>
                         </div>
                     </div>
                 </div>
             @endforeach
-            <div class="pagebreak" style="margin-top: 200px"></div>
+            <div class="pagebreak" style="margin-top: 300px"></div>
         @endforeach
     </div>
 </div>

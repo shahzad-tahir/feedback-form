@@ -36,7 +36,7 @@
                                 <div class="col-6">
                                     <div class="text-right">
                                         <h2 class="text-dark mt-1"><span
-                                                data-plugin="counterup">{{ $vehicles }}</span>
+                                                data-plugin="counterup">{{ $vehicleCount }}</span>
                                         </h2>
                                         <p class="text-muted font-weight-bold font-18 mb-1 text-truncate">Total
                                             Vehicles</p>
@@ -74,6 +74,45 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12">
                     <div class="card-box" style="overflow-x: scroll;">
+                        <form action="{{ route('dashboard') }}" method="GET">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="vehicle_id">Vehicle</label>
+                                        <select name="vehicle_id" id="vehicle_id"
+                                                class="form-control custom-select">
+                                            <option disabled selected>Select Vehicle</option>
+                                            @foreach($vehicles as $vehicle)
+                                                <option
+                                                    value="{{ $vehicle->id }}" {{ request()->vehicle_id == $vehicle->id ? 'selected' : '' }}>{{ $vehicle->name.' ('.$vehicle->number.')' }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('vehicle_id')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date_range">Date Range</label>
+                                        <input type="text" class="form-control range-datepicker" id="date_range"
+                                               name="date_range"
+                                               value="{{ request()->date_range }}" placeholder="Date Range">
+                                        @error('date_range')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3 mt-1">
+                                    <button class="btn btn-sm btn-primary mt-3" type="submit">Set Filter
+                                    </button>
+                                    <a href="{{ route('dashboard') }}" class="btn btn-sm btn-danger mt-3" type="submit">Reset
+                                        Filter
+                                    </a>
+                                </div>
+
+                            </div>
+                        </form>
                         <div id="feedback" style="width: 200%; height: 700px;"></div>
                     </div>
                 </div>
